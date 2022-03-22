@@ -6,7 +6,7 @@ var botID = process.env.BOT_ID;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/facetest$/;
-/*
+  
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
     postMessage();
@@ -16,16 +16,20 @@ function respond() {
     this.res.writeHead(200);
     this.res.end();
   }
-  */
+  /*
    if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    botResponse = "Hello";
+   {
+    "bot_id"  : "1179316f970830de93cc36eb03",
+    "text"    : "Hello world"
+    }
     this.res.end();
   } else {
     console.log("don't care");
     this.res.writeHead(200);
     this.res.end();
   }
+  */ 
 }
 
 function postMessage() {
@@ -41,7 +45,7 @@ function postMessage() {
 
   body = {
     "bot_id" : botID,
-    "text" : botResponse
+    "text" : "Hello World"
   };
 
   console.log('sending ' + botResponse + ' to ' + botID);
