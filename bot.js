@@ -19,7 +19,7 @@ function respond() {
     postMessagetwo();
     this.res.end();
   }
-  else if(request.text && botRegexJokes.test(request.text.toLowerCase())) {
+  else if(request.text && request.user_id == "39318628") {
     this.res.writeHead(200);
     postMessagetwo(randomJoke());
     this.res.end();
