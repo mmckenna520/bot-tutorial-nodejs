@@ -8,7 +8,8 @@ function respond() {
       botRegex = /^\/facetest$/;
       botRegexSTRIKE = /^\/two$/;
       botRegexJokes = /tell me a joke/i;
-      botRegexQuote = /\Bartlett quote/i;
+      botRegexQuote = /Bartlett/i;
+      botRegexMacon = /Macon/i;
   
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
@@ -23,6 +24,11 @@ function respond() {
   else if(request.text && botRegexJokes.test(request.text.toLowerCase())) {
     this.res.writeHead(200);
     postMessagetwo(randomJoke());
+    this.res.end();
+  }
+  else if(request.text && botRegexMacon.test(request.text.toLowerCase())) {
+    this.res.writeHead(200);
+    postMessagetwo(MaconQuote());
     this.res.end();
   }
   else if(request.text && botRegexQuote.test(request.text.toLowerCase())) {
@@ -77,6 +83,26 @@ function randomQuote() {
   'I can\'t hear you over the sound of me getting angry at the guys playing crickett.',
   'If I get hit in the head with one more soccer ball, I\'m going to have a spaz attack.',  
   'Yeah I\'m the RA for this dorm, the Real A-Hole .'
+  ]
+  var randomItem = quotes[Math.floor(Math.random()*quotes.length)];
+  return randomItem
+}
+
+function MaconQuote() {
+  var quotes = [
+  'I make 2 Million in revenue.',
+  'I don\'t drink and drive. I sip and ride.',
+  'My favorite drinking game is driving.',
+  'Wanna see some tits?',
+  'I\'m deciding between buying a rugby house and a strip club.',
+  'If you have a stable income and family life, I have no respect for you.',
+  'I got hoes in every city.',
+  '(half-time) "You guys already lost this game, may as well give up"',
+  'The rugby team was the coolest fraternity back in my day',
+  'Stop being a bunch of bitches and hit somebody',
+  'I could bench 400 pounds back in college',
+  'That car cost more than my wife.',
+  'We\'re only one point from a national championship.'
   ]
   var randomItem = quotes[Math.floor(Math.random()*quotes.length)];
   return randomItem
