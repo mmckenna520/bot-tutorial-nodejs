@@ -1,19 +1,19 @@
 var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
-biddd = 39318628;
+//myiddd = 39318628;
 var botID = process.env.BOT_ID;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/facetest$/;
-      botRegexSTRIKE = biddd();
+      botRegexSTRIKE = /^\two$/;
   
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
     postMessage();
     this.res.end();
   } 
-  else if(request.text && botRegexSTRIKE.test(request.user_id)) {
+  else if(request.text && botRegexSTRIKE.test(request.text)) {
     this.res.writeHead(200);
     postMessagetwo();
     this.res.end();
