@@ -19,7 +19,7 @@ function respond() {
   */
    if(request.text) {
     this.res.writeHead(200);
-    postMessage();
+    botResponse = "Hello";
     this.res.end();
   } else {
     console.log("don't care");
