@@ -13,7 +13,7 @@ function respond() {
     postMessage();
     this.res.end();
   } 
-  else if(request.text && botRegexSTRIKE.test(request.text) && request.name == "mike") {
+  else if(request.text && botRegexSTRIKE.test(request.text) && request.user_id == "39318628") {
     this.res.writeHead(200);
     postMessagetwo();
     this.res.end();
