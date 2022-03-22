@@ -6,13 +6,18 @@ var botID = process.env.BOT_ID;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/facetest$/;
-      botRegexN = /^\/two/;
+      botRegexSTRIKE = /^\/two$/;
   
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
     postMessage();
     this.res.end();
-  } else {
+  } 
+  else if(request.text && botRegexSTRIKE.test(request.text)) {
+    this.res.writeHead(200);
+    postMessage("http://media.giphy.com/media/HFReWqu8qU5mU/giphy.gif");
+    this.res.end();
+  }else {
     console.log("don't care");
     this.res.writeHead(200);
     this.res.end();
