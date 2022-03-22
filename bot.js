@@ -217,7 +217,7 @@ function postMessageTest(response) {
 
   body = {
     "bot_id" : botID,
-    "text" : "I am now active. My commands are Macon, Bartlett, tell me a joke, and \face"
+    "text" : "I am now active."
   };
   
 
