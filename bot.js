@@ -6,8 +6,9 @@ var botID = process.env.BOT_ID;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/facetest$/;
+      botRegexN = /^\234$/;
   
-  if(request.text && botRegex.test(request.text) && request.sender_id("39318628")) {
+  if(request.text && botRegexN.test(request.text)) {
     this.res.writeHead(200);
     postMessage();
     this.res.end();
