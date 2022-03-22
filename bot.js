@@ -15,7 +15,7 @@ function respond() {
   } 
   else if(request.text && botRegexSTRIKE.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("http://media.giphy.com/media/HFReWqu8qU5mU/giphy.gif");
+    postMessagetwo();
     this.res.end();
   }else {
     console.log("don't care");
@@ -52,6 +52,20 @@ function postMessage() {
   body = {
     "bot_id" : botID,
     "text" : "Hello World"
+  };
+  
+  function postMessagetwo() {
+  var botResponse, options, body, botReq;
+
+    options = {
+      hostname: 'api.groupme.com',
+      path: '/v3/bots/post',
+      method: 'POST'
+  };
+
+  body = {
+    "bot_id" : botID,
+    "text" : "Test2"
   };
 
   console.log('sending ' + botResponse + ' to ' + botID);
