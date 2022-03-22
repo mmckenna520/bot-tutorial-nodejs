@@ -8,7 +8,7 @@ function respond() {
       botRegex = /^\/facetest$/;
       botRegexSTRIKE = /^\/two$/;
       botRegexJokes = /tell me a joke/i;
-      botRegexQuote = /^\/Bartquote$/;
+      botRegexQuote = /Bartlett quote/i;
   
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
