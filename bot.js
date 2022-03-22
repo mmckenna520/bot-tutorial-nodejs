@@ -7,6 +7,7 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/facetest$/;
       botRegexSTRIKE = /^\/two$/;
+      botRegexJokes = /tell me a joke/i;
   
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
@@ -17,25 +18,49 @@ function respond() {
     this.res.writeHead(200);
     postMessagetwo();
     this.res.end();
-  }else {
+  }
+  else if(request.text && botRegexJokes.test(request.text.toLowerCase())) {
+    this.res.writeHead(200);
+    postMessagetwo(randomJoke());
+    this.res.end();
+  }
+  else {
     console.log("don't care");
     this.res.writeHead(200);
     this.res.end();
   }
-  /*
-   if(request.text && botRegex.test(request.text)) {
-    this.res.writeHead(200);
-   {
-    "bot_id"  : "1179316f970830de93cc36eb03",
-    "text"    : "Hello world"
-    }
-    this.res.end();
-  } else {
-    console.log("don't care");
-    this.res.writeHead(200);
-    this.res.end();
-  }
-  */ 
+}
+function randomJoke() {
+  var jokes = [
+  'Today, my son asked "Can I have a book mark?" and I burst into tears. 11 years old and he still doesn\'t know my name is Brian.',
+  'Did you know the first French fries weren\'t actually cooked in France? They were cooked in Greece.',
+  'If a child refuses to sleep during nap time, are they guilty of resisting a rest?',
+  'The secret service isn\'t allowed to yell "Get down!" anymore when the president is about to be attacked. Now they have to yell "Donald, duck!"',
+  'What do you call someone with no body and no nose? Nobody knows.',
+  'I ordered a chicken and an egg from Amazon. I’ll let you know',
+  'What is the least spoken language in the world? Sign language.',
+  'My daughter screeched, "Daaaaaad, you haven\'t listened to one word I\'ve said, have you!?" What a strange way to start a conversation with me...',
+  'Justice is a dish best served cold, if it were served warm it would be justwater.',
+  'The fattest knight at King Arthur’s round table was Sir Cumference. He acquired his size from too much pi.',
+  'If you see a robbery at an Apple Store does that make you an iWitness?',
+  'Did you hear the news? FedEx and UPS are merging. They’re going to go by the name Fed-Up from now on.',
+  'What did the pirate say on his 80th birthday? AYE MATEY',
+  'What\'s the best part about living in Switzerland? I don\'t know, but the flag is a big plus.',
+  'What do you call a dog that can do magic? A Labracadabrador.',
+  '5/4 of people admit that they’re bad with fractions.',
+  'I used to have a job at a calendar factory but I got the sack because I took a couple of days off.',
+  'What is Beethoven’s favorite fruit? A ba-na-na-na.',
+  'You know what the loudest pet you can get is? A trumpet.',
+  'Why wasn\'t the woman happy with the velcro she bought? It was a total ripoff.',
+  'Did you hear about the circus fire? It was in tents!',
+  'Want to hear a joke about a piece of paper? Never mind... it\'s tearable.',
+  'If you rearrange the letters of “Postmen”. They get really mad.',
+  'I had a dream that I was a muffler last night. I woke up exhausted!',
+  'Did you see they made round bails of hay illegal in Wisconsin? It’s because the cows weren’t getting a square meal.',
+  'What do prisoners use to call each other? Cell phones.'
+  ]
+  var randomItem = jokes[Math.floor(Math.random()*jokes.length)];
+  return randomItem
 }
 
 function postMessage() {
@@ -73,10 +98,11 @@ function postMessage() {
   });
   botReq.end(JSON.stringify(body));
 }
-function postMessagetwo() {
+
+function postMessagetwo(response) {
   var botResponse, options, body, botReq;
 
-  botResponse = cool();
+  botResponse = response;
 
   options = {
     hostname: 'api.groupme.com',
@@ -86,7 +112,7 @@ function postMessagetwo() {
 
   body = {
     "bot_id" : botID,
-    "text" : "test2"
+    "text" : botResponse
   };
   
 
@@ -109,6 +135,8 @@ function postMessagetwo() {
   botReq.end(JSON.stringify(body));
 }
 
-
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 
 exports.respond = respond;
