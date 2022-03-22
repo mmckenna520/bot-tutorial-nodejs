@@ -8,6 +8,7 @@ function respond() {
       botRegex = /^\/facetest$/;
       botRegexSTRIKE = /^\/two$/;
       botRegexJokes = /tell me a joke/i;
+      botRegexQuote = /^\/Bartquote$/;
   
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
@@ -19,9 +20,14 @@ function respond() {
     postMessagetwo();
     this.res.end();
   }
-  else if(request.text && request.user_id == "39318628") {
+  else if(request.text && botRegexJokes.test(request.text.toLowerCase())) {
     this.res.writeHead(200);
     postMessagetwo(randomJoke());
+    this.res.end();
+  }
+  else if(request.text && botRegexQuote.test(request.text.toLowerCase())) {
+    this.res.writeHead(200);
+    postMessagetwo(randomQuote());
     this.res.end();
   }
   else {
@@ -63,6 +69,19 @@ function randomJoke() {
   return randomItem
 }
 
+function randomQuote() {
+  var quotes = [
+  'There is nothing wrong with punching a hole in sofie\'s wall.',
+  'I cannot wait to hurt someone during a light drill in practice today.',
+  'Beer is cool and all, but have you ever sipped on a Smirnoff Ice?',
+  'I can\'t hear you over the sound of me getting angry at the guys playing crickett.',
+  'If I get hit in the head with one more soccer ball, I\'m going to have a spaz attack.',  
+  'Yeah I\'m the RA for this dorm, the Real A-Hole .'
+  ]
+  var randomItem = quotes[Math.floor(Math.random()*quotes.length)];
+  return randomItem
+}
+
 function postMessage() {
   var botResponse, options, body, botReq;
 
@@ -76,7 +95,7 @@ function postMessage() {
 
   body = {
     "bot_id" : botID,
-    "text" : "Hello World"
+    "text" : botResponse
   };
   
 
