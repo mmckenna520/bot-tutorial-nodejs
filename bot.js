@@ -5,41 +5,47 @@ var botID = process.env.BOT_ID;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
-      botRegex = /^\/facetest$/;
+      botRegex = /^\/face$/;
       botRegexSTRIKE = /^\/two$/;
       botRegexJokes = /tell me a joke/i;
       botRegexQuote = /Bartlett/i;
       botRegexMacon = /Macon/i;
   
-  if(request.text && botRegex.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage();
-    this.res.end();
-  } 
-  else if(request.text && botRegexSTRIKE.test(request.text) && request.user_id == "39318628") {
-    this.res.writeHead(200);
-    postMessagetwo();
-    this.res.end();
-  }
-  else if(request.text && botRegexJokes.test(request.text.toLowerCase())) {
-    this.res.writeHead(200);
-    postMessagetwo(randomJoke());
-    this.res.end();
-  }
-  else if(request.text && botRegexMacon.test(request.text.toLowerCase())) {
-    this.res.writeHead(200);
-    postMessagetwo(MaconQuote());
-    this.res.end();
-  }
-  else if(request.text && botRegexQuote.test(request.text.toLowerCase())) {
-    this.res.writeHead(200);
-    postMessagetwo(randomQuote());
-    this.res.end();
-  }
-  else {
-    console.log("don't care");
-    this.res.writeHead(200);
-    this.res.end();
+  if(request.text && request.user_id != "39318628"){
+    if(request.text && botRegex.test(request.text)) {
+      this.res.writeHead(200);
+      postMessage();
+      this.res.end();
+    } 
+    else if(request.text && botRegexSTRIKE.test(request.text) && request.user_id == "39318628") {
+      this.res.writeHead(200);
+      postMessagetwo();
+      this.res.end();
+    }
+    else if(request.text && botRegexJokes.test(request.text.toLowerCase())) {
+      this.res.writeHead(200);
+      postMessagetwo(randomJoke());
+      this.res.end();
+    }
+    else if(request.text && botRegexMacon.test(request.text.toLowerCase())) {
+      this.res.writeHead(200);
+      postMessagetwo(MaconQuote());
+      this.res.end();
+    }
+    else if(request.text && botRegexQuote.test(request.text.toLowerCase())) {
+      this.res.writeHead(200);
+      postMessagetwo(randomQuote());
+      this.res.end();
+    }
+    else {
+      console.log("don't care");
+      this.res.writeHead(200);
+      this.res.end();
+    }
+  }else {
+     this.res.writeHead(200);
+     postMessagetwo(bartroast());
+     this.res.end();  
   }
 }
 function randomJoke() {
@@ -105,6 +111,18 @@ function MaconQuote() {
   'We\'re only one point from a national championship.'
   ]
   var randomItem = quotes[Math.floor(Math.random()*quotes.length)];
+  return randomItem
+}
+
+function bartroast() {
+  var roast = [
+  'PENIS',
+  'P E N I S',
+  'Penis',
+  'penis',
+  'p e n i s'
+  ]
+  var randomItem = roast[Math.floor(Math.random()*roast.length)];
   return randomItem
 }
 
